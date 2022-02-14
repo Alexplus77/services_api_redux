@@ -1,0 +1,41 @@
+.container-navBar {
+    display: grid;
+    grid-auto-flow: column;
+    padding-left: 10px;
+    height: 70px;
+    background-color: blue;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.container-navLink {
+    display: grid;
+    padding-top: 15px;
+    width: 70%;
+    grid-auto-flow: column;
+}
+
+.navLink {
+    display: grid;
+    grid-auto-flow: column;
+    width: 150px;
+    justify-content: space-around;
+    text-decoration: none;
+    color: white;
+}
+
+.navLink:hover {
+    color: aqua;
+}
+
+.active {
+    color: white;
+    font-size: 20px;
+    border: 2px white solid;
+    border-radius: 5px;
+}

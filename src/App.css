@@ -1,0 +1,15 @@
+body{
+    display: grid;
+    margin: 0;
+    padding: 0;
+justify-items: center;
+
+}
+.container-page{
+    display: grid;
+    width: 1300px;
+    height: 100vh;
+    background-color: #e6e6f8;
+    align-content: baseline;
+
+}
