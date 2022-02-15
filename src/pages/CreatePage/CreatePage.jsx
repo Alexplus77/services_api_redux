@@ -13,19 +13,6 @@ const CreatePage = () => {
           <label htmlFor="price">Цена</label>
           <input className="form-control" id="price" placeholder="Price" />
         </div>
-        <div className="form-group">
-          <label htmlFor="discount">Скидка(%)</label>
-          <input
-            className="form-control"
-            id="discount"
-            placeholder="Discount"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="image">Ссылка на изображение</label>
-          <input className="form-control" id="image" placeholder="Image" />
-        </div>
-
         <button type="submit" className="btn btn-primary">
           Submit
         </button>

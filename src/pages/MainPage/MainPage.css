@@ -1,0 +1,17 @@
+.container-table{
+    width: 600px;
+    justify-self: center;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.icons-edit-container{
+    display: grid;
+    grid-auto-flow: column;
+   font-size: 18px;
+}
+.icons{
+    cursor: pointer;
+}
+
+
