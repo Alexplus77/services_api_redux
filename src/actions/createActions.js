@@ -4,6 +4,8 @@ import {
   FETCH_SERVICES_FAILURE,
   ADD_SERVICE_VALUE,
   FETCH_SERVICE_ITEM,
+  ON_EDIT_MODE,
+  EXIT_EDIT_MODE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -60,4 +62,15 @@ export const handle_fetch_serviceItem = (id) => (dispatch) => {
     .get(`http://localhost:8080/serviceItem/${id}`)
     .then(({ data }) => dispatch(fetch_service_item(data)))
     .catch((e) => dispatch(fetch_services_failure(e)));
+};
+export const on_edit_mode = (data) => ({
+  type: ON_EDIT_MODE,
+  payload: data,
+});
+
+export const exit_edit_mode = () => ({
+  type: EXIT_EDIT_MODE,
+});
+export const onDefaultValue = () => (dispatch) => {
+  dispatch(exit_edit_mode());
 };

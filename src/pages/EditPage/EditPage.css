@@ -1,0 +1,8 @@
+.title-edit-page{
+    justify-self: center;
+}
+.container-edit-page{
+    display: grid;
+    gap: 10px;
+    margin-top: 20px;
+}

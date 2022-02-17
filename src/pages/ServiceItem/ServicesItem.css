@@ -1,11 +1,10 @@
 .site-card-border-less-wrapper{
     justify-self: center;
     margin-top: 50px;
-
 }
 .card_btn{
   display: grid;
     gap: 10px;
     grid-auto-flow: column;
-width: 150px;
+width: 250px;
 }
