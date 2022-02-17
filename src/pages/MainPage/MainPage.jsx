@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MainPage.css";
-import { useSelector } from "react-redux";
-import "antd/dist/antd.css";
+
 import { Table } from "antd";
 import { css } from "@emotion/css";
-import { EditOutlined, DeleteTwoTone } from "@ant-design/icons";
+import { DeleteTwoTone } from "@ant-design/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { services_list_fetch, remove_service } from "actions/createActions";
+import { Link } from "react-router-dom";
 
 const MainPage = () => {
   const { services, errors } = useSelector(
     (state) => state.servicesListReducer
   );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(services_list_fetch());
+  }, [dispatch, services]);
+  const onDelete = (id) => dispatch(remove_service(id));
+
   const columns = [
     {
       title: "Name",
@@ -17,7 +26,9 @@ const MainPage = () => {
       key: "name",
       width: 100,
       align: "center",
-      render: (text) => <a>{text}</a>,
+      render: (text, record) => (
+        <Link to={`/serviceItem/${record.id}`}>{text}</Link>
+      ),
     },
     {
       title: "Price",
@@ -29,14 +40,16 @@ const MainPage = () => {
     {
       title: "Actions",
       dataIndex: "actions",
-      key: "actions",
-      width: 50,
+      width: 20,
+      key: "action",
       align: "center",
-      render: () => {
+      render: (text, record) => {
         return (
-          <div className="icons-edit-container">
-            <EditOutlined className="icons" />
-            <DeleteTwoTone className="icons" />
+          <div key={record.id} className="icons-edit-container">
+            <DeleteTwoTone
+              className="icons"
+              onClick={() => onDelete(record.id)}
+            />
           </div>
         );
       },
@@ -64,6 +77,7 @@ const MainPage = () => {
         dataSource={services}
         columns={columns}
         bordered={true}
+        pagination={{ pageSize: 5 }}
       />
     </div>
   );

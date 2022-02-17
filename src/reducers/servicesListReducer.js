@@ -1,18 +1,29 @@
-import { SERVICES_LIST_FETCH } from "actions/actionTypes";
+import {
+  SERVICES_REQUEST,
+  FETCH_SERVICES_FAILURE,
+  FETCH_SERVICES_SUCCESS,
+  FETCH_SERVICE_ITEM,
+} from "actions/actionTypes";
 
 const initialState = {
   services: [],
+  serviceItem: {},
+  loading: false,
   errors: null,
 };
 const servicesListReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SERVICES_LIST_FETCH:
-      const data = action.payload;
-      if (data.errors) {
-        return { ...state, errors: data.errors };
-      } else {
-        return { ...state, services: data.dataList };
-      }
+    case FETCH_SERVICES_SUCCESS:
+      const { data } = action.payload;
+      return { ...state, services: data, loading: false };
+    case FETCH_SERVICES_FAILURE:
+      const { error } = action.payload;
+      return { ...state, errors: error, loading: false };
+    case SERVICES_REQUEST:
+      return { ...state, loading: true, errors: null };
+    case FETCH_SERVICE_ITEM:
+      const { data: dataItem } = action.payload;
+      return { ...state, serviceItem: dataItem, loading: false, errors: null };
     default:
       return { ...state };
   }
