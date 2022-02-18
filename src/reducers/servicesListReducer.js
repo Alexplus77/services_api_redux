@@ -5,11 +5,14 @@ import {
   FETCH_SERVICE_ITEM,
   ON_EDIT_MODE,
   EXIT_EDIT_MODE,
+  EXIT_ERROR,
+  REMOVE_ITEM,
+  SUCCESS_DELETE,
 } from "actions/actionTypes";
 
 const initialState = {
   services: [],
-  serviceItem: {},
+  serviceItem: { loading: false },
   loading: false,
   errors: null,
   editMode: false,
@@ -23,7 +26,7 @@ const servicesListReducer = (state = initialState, action) => {
         services: data,
         loading: false,
         editMode: false,
-        serviceItem: {},
+        serviceItem: { loading: false },
       };
     case FETCH_SERVICES_FAILURE:
       const { error } = action.payload;
@@ -37,8 +40,16 @@ const servicesListReducer = (state = initialState, action) => {
       return { ...state, editMode: true };
     case EXIT_EDIT_MODE:
       return { ...state, editMode: false, serviceItem: {} };
+    case EXIT_ERROR:
+      return { ...state, errors: null };
+    case REMOVE_ITEM:
+      const idItem = action.payload;
+      const item = state.services.find(({ id }) => id === idItem);
+      return { ...state, serviceItem: { ...item, loading: true } };
+    case SUCCESS_DELETE:
+      return { ...state, serviceItem: {} };
     default:
-      return { ...state };
+      return state;
   }
 };
 export { servicesListReducer };

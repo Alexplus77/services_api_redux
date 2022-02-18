@@ -7,7 +7,7 @@ import {
   exit_edit_mode,
 } from "actions/createActions";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Form = () => {
     (state) => state.servicesListReducer
   );
   const navigate = useNavigate();
-  const errorMessage = "Такая услуга уже существует";
+  const errorMessage = { statusText: "Такая услуга уже существует" };
 
   const onChangeValue = ({ target }) => {
     dispatch(handleAddValue(target.name, target.value));

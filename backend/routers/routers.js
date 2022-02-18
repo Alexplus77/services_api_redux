@@ -25,6 +25,7 @@ router.delete("/:id", (req, res) => {
     db_list_services = db_list_services.filter(
       ({ id }) => String(id) !== req.params.id
     );
+
     res.status(200).send(db_list_services);
   } catch (e) {
     res.status(400).send("Error from server");

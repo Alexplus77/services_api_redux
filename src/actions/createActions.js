@@ -6,6 +6,9 @@ import {
   FETCH_SERVICE_ITEM,
   ON_EDIT_MODE,
   EXIT_EDIT_MODE,
+  EXIT_ERROR,
+  REMOVE_ITEM,
+  SUCCESS_DELETE,
 } from "./actionTypes";
 import axios from "axios";
 
@@ -35,11 +38,18 @@ export const fetch_services_success = (data) => ({
   type: FETCH_SERVICES_SUCCESS,
   payload: { data },
 });
-
+export const remove_item = (id) => ({
+  type: REMOVE_ITEM,
+  payload: id,
+});
+export const success_delete = () => ({
+  type: SUCCESS_DELETE,
+});
 export const remove_service = (id) => (dispatch) => {
+  dispatch(remove_item(id));
   axios
     .delete(`http://localhost:8080/${id}`)
-    .then(({ data }) => fetch_services_success(data))
+    .then(() => dispatch(success_delete()))
     .catch((e) => dispatch(fetch_services_failure(e.response)));
 };
 
@@ -70,4 +80,7 @@ export const on_edit_mode = (data) => ({
 
 export const exit_edit_mode = () => ({
   type: EXIT_EDIT_MODE,
+});
+export const exit_error = () => ({
+  type: EXIT_ERROR,
 });

@@ -9,7 +9,7 @@ import { services_list_fetch, remove_service } from "actions/createActions";
 import { Link } from "react-router-dom";
 
 const MainPage = () => {
-  const { services, errors } = useSelector(
+  const { services, loading, serviceItem } = useSelector(
     (state) => state.servicesListReducer
   );
   const dispatch = useDispatch();
@@ -17,6 +17,7 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(services_list_fetch());
   }, [dispatch, services]);
+
   const onDelete = (id) => dispatch(remove_service(id));
 
   const columns = [
@@ -70,14 +71,13 @@ const MainPage = () => {
   return (
     <div className="container-table">
       <h1>Список услуг</h1>
-      {errors && <div>{errors.data}</div>}
-
       <Table
         className={tableCSS}
         dataSource={services}
         columns={columns}
         bordered={true}
         pagination={{ pageSize: 5 }}
+        loading={loading}
       />
     </div>
   );

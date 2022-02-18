@@ -5,3 +5,6 @@ export const ADD_SERVICE_VALUE = "ADD_SERVICE_VALUE";
 export const FETCH_SERVICE_ITEM = "FETCH_SERVICE_ITEM";
 export const ON_EDIT_MODE = "ON_EDIT_MODE";
 export const EXIT_EDIT_MODE = "EXIT_EDIT_MODE";
+export const EXIT_ERROR = "EXIT_ERROR";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export const SUCCESS_DELETE = "SUCCESS_DELETE";
