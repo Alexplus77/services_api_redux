@@ -45,7 +45,11 @@ const servicesListReducer = (state = initialState, action) => {
     case REMOVE_ITEM:
       const idItem = action.payload;
       const item = state.services.find(({ id }) => id === idItem);
-      return { ...state, serviceItem: { ...item, loading: true } };
+      return {
+        ...state,
+        serviceItem: { ...item, loading: true },
+        loading: false,
+      };
     case SUCCESS_DELETE:
       return { ...state, serviceItem: {} };
     default:

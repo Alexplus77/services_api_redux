@@ -21,13 +21,15 @@ export const fetch_services_request = () => ({
   type: SERVICES_REQUEST,
 });
 
-export const services_list_fetch = () => (dispatch, getState) => {
-  dispatch(fetch_services_request);
+export const services_list_fetch = () => (dispatch) => {
+  dispatch(fetch_services_request());
   axios
-    .get("http://localhost:8080/")
+    .get(process.env.REACT_APP_SERVICES_API)
     .then(({ data }) => dispatch(fetch_services_success(data)))
     .catch((e) => {
-      dispatch(fetch_services_failure(e.response));
+      e.request &&
+        dispatch(fetch_services_failure({ statusText: "Отсутствует связь" }));
+      e.response && dispatch(fetch_services_failure(e.response));
     });
 };
 export const fetch_services_failure = (error) => ({
@@ -48,17 +50,25 @@ export const success_delete = () => ({
 export const remove_service = (id) => (dispatch) => {
   dispatch(remove_item(id));
   axios
-    .delete(`http://localhost:8080/${id}`)
-    .then(() => dispatch(success_delete()))
-    .catch((e) => dispatch(fetch_services_failure(e.response)));
+    .delete(`${process.env.REACT_APP_SERVICES_API}${id}`)
+    .then(({ data }) => dispatch(success_delete()))
+    .catch((e) => {
+      e.request &&
+        dispatch(fetch_services_failure({ statusText: "Отсутствует связь" }));
+      e.response && dispatch(fetch_services_failure(e.response));
+    });
 };
 
 export const submitService = (data) => (dispatch) => {
-  dispatch(fetch_services_request);
+  dispatch(fetch_services_request());
   axios
-    .post(`http://localhost:8080/create`, data)
+    .post(process.env.REACT_APP_SERVICES_CREATE, data)
     .then(({ data }) => fetch_services_success(data))
-    .catch((e) => dispatch(fetch_services_failure(e.response)));
+    .catch((e) => {
+      e.request &&
+        dispatch(fetch_services_failure({ statusText: "Отсутствует связь" }));
+      e.response && dispatch(fetch_services_failure(e.response));
+    });
 };
 
 export const fetch_service_item = (data) => ({
@@ -69,9 +79,13 @@ export const fetch_service_item = (data) => ({
 export const handle_fetch_serviceItem = (id) => (dispatch) => {
   dispatch(fetch_services_request);
   axios
-    .get(`http://localhost:8080/serviceItem/${id}`)
+    .get(`${process.env.REACT_APP_SERVICES_ITEM}${id}`)
     .then(({ data }) => dispatch(fetch_service_item(data)))
-    .catch((e) => dispatch(fetch_services_failure(e)));
+    .catch((e) => {
+      e.request &&
+        dispatch(fetch_services_failure({ statusText: "Отсутствует связь" }));
+      e.response && dispatch(fetch_services_failure(e.response));
+    });
 };
 export const on_edit_mode = (data) => ({
   type: ON_EDIT_MODE,

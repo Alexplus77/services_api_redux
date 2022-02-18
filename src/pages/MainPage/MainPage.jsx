@@ -16,7 +16,7 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(services_list_fetch());
-  }, [dispatch, services]);
+  }, [serviceItem.id]);
 
   const onDelete = (id) => dispatch(remove_service(id));
 
@@ -78,6 +78,7 @@ const MainPage = () => {
         bordered={true}
         pagination={{ pageSize: 5 }}
         loading={loading}
+        rowKey={(record) => record.id}
       />
     </div>
   );
