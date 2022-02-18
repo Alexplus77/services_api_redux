@@ -19,3 +19,9 @@
 .title-create-page{
     justify-self: center;
 }
+.form-btn{
+    display: grid;
+    justify-self: center;
+    grid-auto-flow: column;
+    width: 300px;
+}

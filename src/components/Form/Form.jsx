@@ -4,6 +4,7 @@ import {
   handleAddValue,
   submitService,
   fetch_services_failure,
+  exit_edit_mode,
 } from "actions/createActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,6 +32,10 @@ const Form = () => {
       navigate("/");
     }
   };
+  const handleExitEditMode = () => {
+    dispatch(exit_edit_mode);
+    navigate("/");
+  };
   return (
     <div className="container-create-page">
       <form onSubmit={onSubmitData} className="form-container">
@@ -43,6 +48,7 @@ const Form = () => {
             name="name"
             placeholder="Name"
             value={data.name}
+            required
           />
         </div>
         <div className="form-group">
@@ -55,6 +61,7 @@ const Form = () => {
             name="price"
             placeholder="Price"
             value={data.price}
+            required
           />
         </div>
         <div className="form-group">
@@ -66,16 +73,23 @@ const Form = () => {
             name="describe"
             placeholder="describe"
             value={data.describe}
+            required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-        {editMode && (
+        <div className="form-btn">
           <button type="submit" className="btn btn-primary">
-            Exit
+            Submit
           </button>
-        )}
+          {editMode && (
+            <button
+              onClick={handleExitEditMode}
+              type="submit"
+              className="btn btn-primary"
+            >
+              Exit
+            </button>
+          )}
+        </div>
       </form>
     </div>
   );

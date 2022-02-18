@@ -18,7 +18,13 @@ const servicesListReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_SERVICES_SUCCESS:
       const { data } = action.payload;
-      return { ...state, services: data, loading: false, editMode: false };
+      return {
+        ...state,
+        services: data,
+        loading: false,
+        editMode: false,
+        serviceItem: {},
+      };
     case FETCH_SERVICES_FAILURE:
       const { error } = action.payload;
       return { ...state, errors: error, loading: false, editMode: false };
@@ -30,7 +36,7 @@ const servicesListReducer = (state = initialState, action) => {
     case ON_EDIT_MODE:
       return { ...state, editMode: true };
     case EXIT_EDIT_MODE:
-      return { ...state, editMode: false };
+      return { ...state, editMode: false, serviceItem: {} };
     default:
       return { ...state };
   }

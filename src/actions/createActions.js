@@ -71,6 +71,3 @@ export const on_edit_mode = (data) => ({
 export const exit_edit_mode = () => ({
   type: EXIT_EDIT_MODE,
 });
-export const onDefaultValue = () => (dispatch) => {
-  dispatch(exit_edit_mode());
-};
