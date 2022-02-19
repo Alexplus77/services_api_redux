@@ -17,6 +17,7 @@ const Form = () => {
   );
   const navigate = useNavigate();
   const errorMessage = { statusText: "Такая услуга уже существует" };
+  const errorEmptyString = { statusText: "Вы не заполнили все поля" };
 
   const onChangeValue = ({ target }) => {
     dispatch(handleAddValue(target.name, target.value));
@@ -27,6 +28,8 @@ const Form = () => {
     const findItem = services.find(({ name }) => name === data.name);
     if (findItem && !editMode) {
       dispatch(fetch_services_failure(errorMessage));
+    } else if (!data.name.trim() || !data.describe.trim()) {
+      dispatch(fetch_services_failure(errorEmptyString));
     } else {
       dispatch(submitService(data));
       navigate("/");

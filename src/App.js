@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { Error } from "components/Errors";
 
 function App() {
-  const { errors, loading } = useSelector((state) => state.servicesListReducer);
-  console.log(errors);
+  const { errors } = useSelector((state) => state.servicesListReducer);
   return (
     <div className="App">
       {errors && <Error />}
