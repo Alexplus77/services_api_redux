@@ -1,10 +1,22 @@
 .site-card-border-less-wrapper{
+    display: grid;
     justify-self: center;
     margin-top: 50px;
+    background-color: white;
+    padding: 5px;
 }
 .card_btn{
   display: grid;
     gap: 10px;
     grid-auto-flow: column;
 width: 250px;
+}
+.close-icon{
+    justify-self: right;
+    font-size: 20px;
+    color: red;
+    cursor: pointer;
+}
+.close-icon:hover{
+    font-size: 22px;
 }

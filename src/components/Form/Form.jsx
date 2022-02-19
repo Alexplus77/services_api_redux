@@ -83,15 +83,9 @@ const Form = () => {
           <button type="submit" className="btn btn-primary">
             Submit
           </button>
-          {editMode && (
-            <button
-              onClick={handleExitEditMode}
-              type="submit"
-              className="btn btn-primary"
-            >
-              Exit
-            </button>
-          )}
+          <button onClick={handleExitEditMode} className="btn btn-primary">
+            {editMode ? "Exit" : "Back"}
+          </button>
         </div>
       </form>
     </div>
